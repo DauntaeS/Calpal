@@ -6,7 +6,7 @@ import colors from "../config/colors";
 function WelcomeScreen(props) {
   return (
     <ImageBackground
-      resizeMode="cover"
+      resizeMode="container"
       style={styles.background}
       source={require("../assets/background.jpg")}
     >
