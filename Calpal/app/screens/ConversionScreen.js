@@ -88,13 +88,13 @@ function ConversionScreen(props) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
     justifyContent: "center",
     alignItems: "center",
   },
   input: {
     height: 40,
-    borderColor: colors.white,
+    borderColor: colors.black,
     width: "80%",
     margin: 12,
     borderWidth: 1,
