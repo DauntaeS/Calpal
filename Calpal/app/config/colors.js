@@ -1,5 +1,10 @@
 export default {
-  primary: "#fc5c65",
-  secondary: "#4ecdc4",
-  black: "#000",
+  // Primary = Dark Blue
+  // Secondary = Light Gray
+  // Accent = Bright Orange
+  primary: "#14213D",
+  secondary: "#E5E5E5",
+  accent: "FCA311",
+  black: "#000000",
+  white: "FFFFFF",
 };
