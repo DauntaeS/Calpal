@@ -1,26 +1,45 @@
-import React from "react";
-import { Image, ImageBackground, StyleSheet, View, Text } from "react-native";
+import React, { useState } from "react";
+import {
+  Image,
+  ImageBackground,
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  TextInput,
+} from "react-native";
 
 import colors from "../config/colors";
 
 function WelcomeScreen(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
-    <ImageBackground
-      resizeMode="container"
-      style={styles.background}
-      source={require("../assets/background.jpg")}
-    >
-      <View style={styles.logoContainer}>
+    <View style={styles.background}>
+      <View style={styles.containerView}>
         <Image
           resizeMode="contain"
           styles={styles.logo}
-          source={require("../assets/logo-orange.png")}
+          source={require("../assets/CalPal-white.png")}
         />
-        <Text>Burn what you eat!</Text>
+        <Text style={styles.text}>Burn what you eat!!</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setEmail}
+          value={email}
+          placeholder="james@yahoo.com"
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={setPassword}
+          value={password}
+          placeholder="Enter Password"
+        />
+        <Button title="Login" style={styles.loginButton} />
+        <Button title="Sign Up" style={styles.registerButton} />
       </View>
-      <View style={styles.loginButton}></View>
-      <View style={styles.registerButton}></View>
-    </ImageBackground>
+    </View>
   );
 }
 
@@ -32,16 +51,31 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
   },
+  containerView: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+  input: {
+    height: 40,
+    borderColor: colors.black,
+    width: "80%",
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    backgroundColor: colors.accent,
+    color: colors.black,
+    borderRadius: 5,
+  },
   loginButton: {
-    width: "100%",
+    width: "80%",
     height: 70,
-    backgroundColor: colors.primary,
   },
   logo: {
-    width: "100%",
-    height: "100%",
-    position: "absolute",
-    top: 70,
+    width: "50%",
+    height: undefined,
+    resizeMode: "contain",
   },
   logoContainer: {
     position: "absolute",
@@ -51,7 +85,9 @@ const styles = StyleSheet.create({
   registerButton: {
     width: "100%",
     height: 70,
-    backgroundColor: colors.secondary,
+  },
+  text: {
+    color: "red",
   },
 });
 
