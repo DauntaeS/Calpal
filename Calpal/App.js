@@ -8,7 +8,7 @@ export default function App() {
   // Remember to delete this console.log
   console.log("App Executed");
 
-  return <ConversionScreen />;
+  return <WelcomeScreen />;
 }
 
 const styles = StyleSheet.create({
