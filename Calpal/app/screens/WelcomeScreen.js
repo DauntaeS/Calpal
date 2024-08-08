@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import {
   Image,
-  ImageBackground,
   StyleSheet,
   View,
   Text,
   Button,
   TextInput,
+  Dimensions,
+  TouchableOpacity,
 } from "react-native";
 
 import colors from "../config/colors";
@@ -14,6 +15,15 @@ import colors from "../config/colors";
 function WelcomeScreen(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = async () => {
+    if (email === "" || password === "") {
+      alert("All fields are required");
+      return;
+    }
+    await axios.post("http://localhost:8001/api/signup", { email, password });
+    alert("Sign Up Successful");
+  };
 
   return (
     <View style={styles.background}>
@@ -29,26 +39,42 @@ function WelcomeScreen(props) {
           onChangeText={setEmail}
           value={email}
           placeholder="james@yahoo.com"
+          autoCapitalize="words"
+          autoCorrect={false}
         />
         <TextInput
           style={styles.input}
           onChangeText={setPassword}
           value={password}
           placeholder="Enter Password"
+          secureTextEntry={true}
+          autoCompleteType="password"
         />
-        <Button title="Login" style={styles.loginButton} />
-        <Button title="Sign Up" style={styles.registerButton} />
+        <TouchableOpacity onPress={handleSubmit} style={styles.buttonStyle}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+        <Text style={{ marginHorizontal: 24 }}>
+          {JSON.stringify({ email })}
+        </Text>
+        <TouchableOpacity onPress={handleSubmit} style={styles.buttonStyle}>
+          <Text style={styles.buttonText}>SignUp</Text>
+        </TouchableOpacity>
+        <Text style={{ marginHorizontal: 24 }}>
+          {JSON.stringify({ password })}
+        </Text>
       </View>
     </View>
   );
 }
+
+const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   background: {
     flex: 1,
     width: "100%",
     height: "100%",
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "center",
   },
   containerView: {
@@ -68,23 +94,28 @@ const styles = StyleSheet.create({
     color: colors.black,
     borderRadius: 5,
   },
-  loginButton: {
-    width: "80%",
-    height: 70,
+  buttonStyle: {
+    backgroundColor: colors.primary,
+    width: "100%",
+    height: 50,
+    justifyContent: "center",
+    marginHorizontal: 15,
+    borderRadius: 15,
+  },
+  buttonText: {
+    fontSize: 20,
+    textAlign: "center",
+    color: colors.secondary,
+    textTransform: "uppercase",
+    fontWeight: "bold",
   },
   logo: {
-    width: "50%",
-    height: undefined,
-    resizeMode: "contain",
+    width: "100%",
   },
   logoContainer: {
     position: "absolute",
     top: 70,
     alignItems: "center",
-  },
-  registerButton: {
-    width: "100%",
-    height: 70,
   },
   text: {
     color: "red",
