@@ -23,7 +23,7 @@ function WelcomeScreen(props) {
           styles={styles.logo}
           source={require("../assets/CalPal-white.png")}
         />
-        <Text style={styles.text}>Burn what you eat!!</Text>
+        <Text style={styles.text}>Burn what you eat!!!</Text>
         <TextInput
           style={styles.input}
           onChangeText={setEmail}
