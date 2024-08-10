@@ -9,6 +9,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import colors from "../config/colors";
 
@@ -26,67 +27,66 @@ function WelcomeScreen(props) {
   };
 
   return (
-    <View style={styles.background}>
-      <View style={styles.containerView}>
-        <Image
-          resizeMode="contain"
-          styles={styles.logo}
-          source={require("../assets/CalPal-white.png")}
-        />
-        <Text style={styles.text}>Burn what you eat!!!</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setEmail}
-          value={email}
-          placeholder="james@yahoo.com"
-          autoCapitalize="words"
-          autoCorrect={false}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={setPassword}
-          value={password}
-          placeholder="Enter Password"
-          secureTextEntry={true}
-          autoCompleteType="password"
-        />
-        <TouchableOpacity onPress={handleSubmit} style={styles.buttonStyle}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <Text style={{ marginHorizontal: 24 }}>
-          {JSON.stringify({ email })}
-        </Text>
-        <TouchableOpacity onPress={handleSubmit} style={styles.buttonStyle}>
-          <Text style={styles.buttonText}>SignUp</Text>
-        </TouchableOpacity>
-        <Text style={{ marginHorizontal: 24 }}>
-          {JSON.stringify({ password })}
-        </Text>
+    <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+      <View style={{ marginVertical: 100 }}>
+        <View style={styles.imageContainer}>
+          <Image
+            resizeMode="contain"
+            styles={styles.logo}
+            source={require("../assets/CalPal-white.png")}
+          />
+        </View>
+        <View style={styles.containerView}>
+          <Text style={styles.text}>Burn what you eat!!!</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={setEmail}
+            value={email}
+            placeholder="james@yahoo.com"
+            autoCapitalize="words"
+            autoCorrect={false}
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={setPassword}
+            value={password}
+            placeholder="Enter Password"
+            secureTextEntry={true}
+            autoCompleteType="password"
+          />
+          <TouchableOpacity onPress={handleSubmit} style={styles.buttonStyle}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+          <Text style={{ marginHorizontal: 24 }}>
+            {JSON.stringify({ email })}
+          </Text>
+          <TouchableOpacity onPress={handleSubmit} style={styles.buttonStyle}>
+            <Text style={styles.buttonText}>SignUp</Text>
+          </TouchableOpacity>
+          <Text style={{ marginHorizontal: 24 }}>
+            {JSON.stringify({ password })}
+          </Text>
+        </View>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 }
 
 const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
   containerView: {
     flex: 1,
     flexDirection: "column",
     justifyContent: "flex-end",
     alignItems: "center",
   },
+  imageContainer: { justifyContent: "center", alignItems: "center" },
+  imageStyles: { width: 100, height: 100, marginVertical: 20 },
   input: {
-    height: 40,
+    height: height * 0.05,
     borderColor: colors.black,
-    width: "80%",
+    width: width * 0.8,
     margin: 12,
     borderWidth: 1,
     padding: 10,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     backgroundColor: colors.primary,
-    width: "100%",
+    width: width * 0.3,
     height: 50,
     justifyContent: "center",
     marginHorizontal: 15,
@@ -110,12 +110,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   logo: {
-    width: "100%",
+    width: width * 0.5,
+    height: width * 0.5,
   },
   logoContainer: {
     position: "absolute",
-    top: 70,
+    top: (height - width * 0.5) / 2,
+    left: (width - width * 0.5) / 2,
     alignItems: "center",
+    justifyContent: "center", // Ensure the image is centered
+    width: width * 0.5, // Same width as the image
+    height: width * 0.5, // Same height as the image
   },
   text: {
     color: "red",
