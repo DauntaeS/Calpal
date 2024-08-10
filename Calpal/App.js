@@ -1,14 +1,24 @@
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
-import WelcomeScreen from "./app/screens/WelcomeScreen";
+import SignUpScreen from "./app/screens/SignUpScreen";
+import SignInScreen from "./app/screens/SignInScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import ConversionScreen from "./app/screens/ConversionScreen";
 
-export default function App() {
-  // Remember to delete this console.log
-  console.log("App Executed");
+const Stack = createNativeStackNavigator();
 
-  return <WelcomeScreen />;
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SignInScreen">
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
 
 const styles = StyleSheet.create({
